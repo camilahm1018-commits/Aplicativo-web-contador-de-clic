@@ -35,6 +35,7 @@ export default function App() {
       <Text style={estilos.descripcion}>Haz clic en el boton para incrementar 
         el contador y registra la hora exacta del envento en la tabla.</Text>
       <Text style={[estilos.contador,contador > 10 && estilos.contadorAlto, ]}>{contador}</Text>
+      {contador > 10 && (<Text style={estilos.mensaje}>¡Has superado los 10 clics!</Text>)}
       <TouchableOpacity
         style={estilos.btnClick}
         onPress={incrementarContador}
@@ -115,6 +116,13 @@ const estilos = StyleSheet.create({
   },
   contadorAlto: {
     color: "#e73c3c",
+  },
+  mensaje: {
+    color: "#ff7f71",
+    fontSize: 14,
+    fontWeight: "bold",
+    marginBottom: 15,
+    textAlign: "center",
   },
   btnClick: {
     backgroundColor: "#2ecc71",

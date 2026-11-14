@@ -1,6 +1,11 @@
-
 import { useState } from "react";
-import {StyleSheet,Text,TouchableOpacity,View,ScrollView,} from "react-native";
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 type Registro = {
   id: number;
@@ -19,10 +24,7 @@ export default function App() {
       numero: nuevoNumero,
       hora: new Date().toLocaleTimeString("es-CO"),
     };
-    setRegistros((registrosActuales) => [
-      ...registrosActuales,
-      nuevoRegistro,
-    ]);
+    setRegistros((registrosActuales) => [...registrosActuales, nuevoRegistro]);
   };
   const reiniciarContador = () => {
     setContador(0);
@@ -30,50 +32,53 @@ export default function App() {
   };
   return (
     <View style={estilos.body}>
-      <View style={estilos.tarjeta}>
-      <Text style={estilos.titulo}>Interactividad con el DOM</Text>
-      <Text style={estilos.descripcion}>Haz clic en el boton para incrementar 
-        el contador y registra la hora exacta del envento en la tabla.</Text>
-      <Text style={[estilos.contador,contador > 10 && estilos.contadorAlto, ]}>{contador}</Text>
-      {contador > 10 && (<Text style={estilos.mensaje}>¡Has superado los 10 clics!</Text>)}
-      <TouchableOpacity
-        style={estilos.btnClick}
-        onPress={incrementarContador}
-      >
-        <Text style={estilos.btnText}>¡Haz clic aquí!</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={estilos.btnReiniciar}
-        onPress={reiniciarContador}
-      >
-        <Text style={estilos.btnText}>Reiniciar contador</Text>
-      </TouchableOpacity>
-      <View style={estilos.tableContainer}>
-        <View style={estilos.tableHeader}>
-          <Text style={estilos.th}>Nº Clic</Text>
-          <Text style={estilos.th}>Hora</Text>
+      <View style={[estilos.tarjeta, contador > 10 && estilos.tarjetaActiva]}>
+        <Text style={estilos.titulo}>Interactividad con el DOM</Text>
+        <Text style={estilos.descripcion}>
+          Haz clic en el boton para incrementar el contador y registra la hora
+          exacta del envento en la tabla.
+        </Text>
+        <Text style={[estilos.contador, contador > 10 && estilos.contadorAlto]}>
+          {contador}
+        </Text>
+        {contador > 10 && (
+          <Text style={estilos.mensaje}>¡Has superado los 10 clics!</Text>
+        )}
+        <TouchableOpacity
+          style={estilos.btnClick}
+          onPress={incrementarContador}
+        >
+          <Text style={estilos.btnText}>¡Haz clic aquí!</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={estilos.btnReiniciar}
+          onPress={reiniciarContador}
+        >
+          <Text style={estilos.btnText}>Reiniciar contador</Text>
+        </TouchableOpacity>
+        <View style={estilos.tableContainer}>
+          <View style={estilos.tableHeader}>
+            <Text style={estilos.th}>Nº Clic</Text>
+            <Text style={estilos.th}>Hora</Text>
+          </View>
+          <ScrollView style={estilos.tableBody}>
+            {registros.map((item, index) => (
+              <View
+                key={item.id}
+                style={[estilos.tr, index % 2 === 0 ? estilos.trEven : null]}
+              >
+                <Text style={estilos.td}>{item.numero}</Text>
+                <Text style={estilos.td}>{item.hora}</Text>
+              </View>
+            ))}
+          </ScrollView>
         </View>
-        <ScrollView style={estilos.tableBody}>
-          {registros.map((item, index) => (
-            <View
-              key={item.id}
-              style={[
-                estilos.tr,
-                index % 2 === 0 ? estilos.trEven : null,
-              ]}
-            >
-              <Text style={estilos.td}>{item.numero}</Text>
-              <Text style={estilos.td}>{item.hora}</Text>
-            </View>
-          ))}
-        </ScrollView> 
-      </View>
       </View>
     </View>
   );
 }
 
-const estilos = StyleSheet.create({                                 
+const estilos = StyleSheet.create({
   body: {
     flex: 1,
     backgroundColor: "rgb(241, 240, 240)",
@@ -90,16 +95,19 @@ const estilos = StyleSheet.create({
     alignItems: "center",
     shadowColor: "#000000",
     shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.10,
+    shadowOpacity: 0.1,
     shadowRadius: 15,
     elevation: 5,
   },
-  titulo: {   
-  color: "#022344",
-  fontSize: 28,
-  fontWeight: "bold",
-  marginBottom: 10,
-  textAlign: "center",
+  tarjetaActiva: {
+    backgroundColor: "#b4ddfa",
+  },
+  titulo: {
+    color: "#022344",
+    fontSize: 28,
+    fontWeight: "bold",
+    marginBottom: 10,
+    textAlign: "center",
   },
   descripcion: {
     color: "#464545",

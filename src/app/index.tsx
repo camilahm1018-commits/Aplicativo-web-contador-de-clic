@@ -1,12 +1,6 @@
 
 import { useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  ScrollView,
-} from "react-native";
+import {StyleSheet,Text,TouchableOpacity,View,ScrollView,} from "react-native";
 
 type Registro = {
   id: number;
@@ -17,46 +11,47 @@ type Registro = {
 export default function App() {
   const [contador, setContador] = useState(0);
   const [registros, setRegistros] = useState<Registro[]>([]);
-
   const incrementarContador = () => {
     const nuevoNumero = contador + 1;
     setContador(nuevoNumero);
-
     const nuevoRegistro: Registro = {
       id: Date.now(),
       numero: nuevoNumero,
       hora: new Date().toLocaleTimeString("es-CO"),
     };
-
     setRegistros((registrosActuales) => [
       ...registrosActuales,
       nuevoRegistro,
     ]);
   };
-
   return (
     <View style={estilos.body}>
       <Text style={estilos.contador}>{contador}</Text>
-
       <TouchableOpacity
         style={estilos.btnClick}
         onPress={incrementarContador}
       >
         <Text style={estilos.btnText}>¡Haz clic aquí!</Text>
       </TouchableOpacity>
-
       <View style={estilos.tableContainer}>
         <View style={estilos.tableHeader}>
           <Text style={estilos.th}>Nº Clic</Text>
           <Text style={estilos.th}>Hora</Text>
         </View>
-
-        {registros.map((item) => (
-          <View key={item.id} style={estilos.tr}>
-            <Text style={estilos.td}>{item.numero}</Text>
-            <Text style={estilos.td}>{item.hora}</Text>
-          </View>
-        ))}
+        <ScrollView style={estilos.tableBody}>
+          {registros.map((item, index) => (
+            <View
+              key={item.id}
+              style={[
+                estilos.tr,
+                index % 2 === 0 ? estilos.trEven : null,
+              ]}
+            >
+              <Text style={estilos.td}>{item.numero}</Text>
+              <Text style={estilos.td}>{item.hora}</Text>
+            </View>
+          ))}
+        </ScrollView>
       </View>
     </View>
   );
@@ -70,14 +65,12 @@ const estilos = StyleSheet.create({
     alignItems: "center",
     padding: 20,
   },
-
   contador: {
     color: "#3498db",
     fontSize: 36,
     fontWeight: "bold",
     marginBottom: 16,
   },
-
   btnClick: {
     backgroundColor: "#2ecc71",
     paddingVertical: 9,
@@ -100,28 +93,23 @@ const estilos = StyleSheet.create({
     borderRadius: 6,
     overflow: "hidden",
   },
-
   tableHeader: {
     flexDirection: "row",
     backgroundColor: "#f5f6f7",
   },
-
   tableBody: {
     maxHeight: 170,
     backgroundColor: "#ffffff",
   },
-
   tr: {
     flexDirection: "row",
     backgroundColor: "#ffffff",
     borderTopWidth: 1,
     borderTopColor: "#e5e5e5",
   },
-
   trEven: {
     backgroundColor: "#ecebeb",
   },
-
   th: {
     color: "#777777",
     fontSize: 11,
@@ -130,7 +118,6 @@ const estilos = StyleSheet.create({
     textAlign: "center",
     flex: 1,
   },
-
   td: {
     color: "#555555",
     fontSize: 12,

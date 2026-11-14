@@ -26,6 +26,7 @@ export default function App() {
   };
   return (
     <View style={estilos.body}>
+      <View style={estilos.tarjeta}>
       <Text style={estilos.titulo}>Interactividad con el DOM</Text>
       <Text style={estilos.descripcion}>Haz clic en el boton para incrementar 
         el contador y registra la hora exacta del envento en la tabla.</Text>
@@ -56,6 +57,7 @@ export default function App() {
           ))}
         </ScrollView> 
       </View>
+      </View>
     </View>
   );
 }
@@ -68,7 +70,20 @@ const estilos = StyleSheet.create({
     alignItems: "center",
     padding: 20,
   },
-  titulo: {
+  tarjeta: {
+    width: "100%",
+    maxWidth: 423,
+    backgroundColor: "#ffffff",
+    padding: 24,
+    borderRadius: 16,
+    alignItems: "center",
+    shadowColor: "#000000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.10,
+    shadowRadius: 15,
+    elevation: 5,
+  },
+  titulo: {   
   color: "#022344",
   fontSize: 28,
   fontWeight: "bold",

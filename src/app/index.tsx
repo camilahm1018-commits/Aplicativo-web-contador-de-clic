@@ -24,6 +24,10 @@ export default function App() {
       nuevoRegistro,
     ]);
   };
+  const reiniciarContador = () => {
+    setContador(0);
+    setRegistros([]);
+  };
   return (
     <View style={estilos.body}>
       <View style={estilos.tarjeta}>
@@ -36,6 +40,12 @@ export default function App() {
         onPress={incrementarContador}
       >
         <Text style={estilos.btnText}>¡Haz clic aquí!</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={estilos.btnReiniciar}
+        onPress={reiniciarContador}
+      >
+        <Text style={estilos.btnText}>Reiniciar contador</Text>
       </TouchableOpacity>
       <View style={estilos.tableContainer}>
         <View style={estilos.tableHeader}>
@@ -111,7 +121,14 @@ const estilos = StyleSheet.create({
     marginBottom: 20,
     alignItems: "center",
   },
-
+  btnReiniciar: {
+    backgroundColor: "#e74c3c",
+    paddingVertical: 9,
+    paddingHorizontal: 22,
+    borderRadius: 5,
+    marginBottom: 20,
+    alignItems: "center",
+  },
   btnText: {
     color: "#ffffff",
     fontSize: 14,

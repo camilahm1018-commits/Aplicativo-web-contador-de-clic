@@ -26,6 +26,9 @@ export default function App() {
   };
   return (
     <View style={estilos.body}>
+      <Text style={estilos.titulo}>Interactividad con el DOM</Text>
+      <Text style={estilos.descripcion}>Haz clic en el boton para incrementar 
+        el contador y registra la hora exacta del envento en la tabla.</Text>
       <Text style={estilos.contador}>{contador}</Text>
       <TouchableOpacity
         style={estilos.btnClick}
@@ -51,19 +54,33 @@ export default function App() {
               <Text style={estilos.td}>{item.hora}</Text>
             </View>
           ))}
-        </ScrollView>
+        </ScrollView> 
       </View>
     </View>
   );
 }
 
-const estilos = StyleSheet.create({
+const estilos = StyleSheet.create({                                 
   body: {
     flex: 1,
     backgroundColor: "rgb(241, 240, 240)",
     justifyContent: "center",
     alignItems: "center",
     padding: 20,
+  },
+  titulo: {
+  color: "#022344",
+  fontSize: 28,
+  fontWeight: "bold",
+  marginBottom: 10,
+  textAlign: "center",
+  },
+  descripcion: {
+    color: "#464545",
+    fontSize: 15,
+    lineHeight: 18,
+    marginBottom: 17,
+    textAlign: "center",
   },
   contador: {
     color: "#3498db",
